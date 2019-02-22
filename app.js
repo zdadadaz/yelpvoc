@@ -1,3 +1,4 @@
+require('./config/config');
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -20,7 +21,10 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 
 // route
-mongoose.connect("mongodb://localhost:27017/yelp_voc",{useNewUrlParser:true})
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true
+})
 var app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 const port = process.env.PORT || 3000;

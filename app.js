@@ -22,9 +22,11 @@ const User = require("./models/user");
 
 // route
 mongoose.Promise = global.Promise;
+
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true
 })
+
 var app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 const port = process.env.PORT || 3000;

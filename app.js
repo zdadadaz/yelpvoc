@@ -8,7 +8,7 @@ const Comment = require("./models/comment");
 const seedDB = require("./seed/seed");
 const methodOverride = require("method-override");
 const flash = require("connect-flash");
-require('dotenv').config()
+// require('dotenv').config()
 
 //requiring routes
 var commentRoutes = require("./routes/comments"),
@@ -22,8 +22,8 @@ const User = require("./models/user");
 
 // route
 mongoose.Promise = global.Promise;
-
-mongoose.connect(process.env.MONGODB_URI, {
+//process.env.MONGODB_URI
+mongoose.connect('mongodb://zdadadaz:chiou5917@ds347665.mlab.com:47665/yelpvoc', {
     useNewUrlParser: true
 })
 

@@ -28,19 +28,22 @@ router.post("/register", function (req, res) {
     // eval(require('locus'));
     if(req.body.adminCode === process.env.adminCode){
         newUser.isAdmin = true;
-    }
-    User.register(newUser, req.body.password, function (err, user) {
-        if (err) {
-            // console.log(err);
-            req.flash("error", err.message);
-            res.redirect("/register");
-            // res.render("register",{err:err.message});
-        }
-        passport.authenticate("local")(req, res, function () {
-            req.flash("success", "Welcome to YelpVoc " + user.username);
-            res.redirect("/voclist");
+        User.register(newUser, req.body.password, function (err, user) {
+            if (err) {
+                // console.log(err);
+                req.flash("error", err.message);
+                res.redirect("/register");
+                // res.render("register",{err:err.message});
+            }
+            passport.authenticate("local")(req, res, function () {
+                req.flash("success", "Welcome to YelpVoc " + user.username);
+                res.redirect("/voclist");
+            })
         })
-    })
+    }else{
+        req.flash("error", "Sorry, we have not opened yet");
+        res.redirect("/voclist");
+    }
 })
 
 //show login form

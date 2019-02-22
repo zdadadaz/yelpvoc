@@ -1,0 +1,60 @@
+<% include ../partials/header %>
+
+    <% if(currentUser && currentUser.isAdmin) { %>
+        <h1>You're an admin</h1>
+    <% } %>
+
+    <header class="jumbotron">
+        <div class="jumbotron">
+            <h1>Welcome To YelpVoc!</h1>
+            <p>Learn vocabularies from different angles.</p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="/voclist/new">Add New vocabularies</a>
+            </p>
+            <p>
+                <form action="/voclist" method="GET" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" name="search" placeholder="Voc search" class="form-control">
+                        <input type="Submit" value="Search" class="btn btn-default">
+                    </div>
+                </form>
+            </p>
+        </div>
+    </header>
+
+    <div class="row text-center" style="display: flex; flex-wrap:wrap;">
+        <div class="col-md-12">
+            <% if(noMatch !== null) { %>
+            <h3>
+                <%= noMatch %>
+            </h3>
+            <p>
+                <form action="/voclist" method="GET" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" name="search" placeholder="Voc search..." class="form-control">
+                        <input type="submit" value="Search" class="btn btn-default">
+                    </div>
+                </form>
+            </p>
+            <% } %>
+        </div>
+        <% voclist.forEach(function(voc){ %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="<%= voc.img %>" alt="">
+                    <div class="caption">
+                        <h4><%= voc.word %></h4>
+                        <p><%= voc.enDefinition %></p>
+                    </div>
+                    <p>
+                    <a href="/voclist/<%= voc._id %>" class="btn btn-primary">More Info</a>
+                    </p>
+                </div>
+            </div>
+            
+        <% }); %>
+    </div>
+
+    <!-- pagination -->
+
+<% include ../partials/footer %>
